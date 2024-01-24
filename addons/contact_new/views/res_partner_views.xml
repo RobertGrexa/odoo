@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Create a new record that inherits the base odoo form view of contact -->
+        <record id="view_partner_form_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <!-- Xpaths an existing field tags and add a field gender after it. Conditionally display it only for individuals. -->
+                <xpath expr="//field[@name='category_id']" position="after">
+                    <field name="gender" attrs="{'invisible': [('company_type', '!=', 'person'), '|', ('type', '!=', 'contact'), ('type', '!=', 'private')]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
